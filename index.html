@@ -784,35 +784,43 @@ Bagi saya, desain bukan hanya tentang tampilan yang menarik, tetapi juga tentang
     </div>
 
     <!-- Container dengan Scroll Horizontal & Efek Lengkung ke Dalam -->
-    <div class="flex items-center justify-center gap-4 overflow-x-auto py-8 px-4 no-scrollbar snap-x snap-mandatory">
+   <!-- SECTION: GALERI DOKUMENTASI (UKURAN KECIL & MIRING KE DALAM) -->
+<div class="flex flex-col gap-6 my-10 overflow-hidden">
+    <div class="text-center flex flex-col items-center gap-2">
+        <span class="text-xs text-primary tracking-widest uppercase font-bold">Moments & Memories</span>
+        <h3 class="text-2xl md:text-3xl font-bold text-text-primary">Dokumentasi Kegiatan</h3>
+    </div>
+
+    <!-- Container dengan Scroll Horizontal -->
+    <div class="flex items-center justify-center gap-3 overflow-x-auto py-6 px-4 no-scrollbar snap-x snap-mandatory">
         
-        <!-- Foto 1 (Miring ke kanan/dalam) -->
-        <div onclick="openCertificate('1.jpeg')" class="group relative w-[160px] sm:w-[190px] md:w-[220px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-2xl shrink-0 snap-center rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-300 z-10">
+        <!-- Foto 1 -->
+        <div onclick="openCertificate('1.jpeg')" class="group relative w-[130px] sm:w-[150px] md:w-[180px] aspect-[3/4] rounded-xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-xl shrink-0 snap-center rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-300 z-10">
             <img src="1.jpeg" alt="Dokumentasi 1" class="w-full h-full object-cover">
         </div>
 
-        <!-- Foto 2 (Miring sedikit ke kanan/dalam) -->
-        <div onclick="openCertificate('2.jpeg')" class="group relative w-[170px] sm:w-[200px] md:w-[235px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-2xl shrink-0 snap-center rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300 z-20">
+        <!-- Foto 2 -->
+        <div onclick="openCertificate('2.jpeg')" class="group relative w-[140px] sm:w-[160px] md:w-[195px] aspect-[3/4] rounded-xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-xl shrink-0 snap-center rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300 z-20">
             <img src="2.jpeg" alt="Dokumentasi 2" class="w-full h-full object-cover">
         </div>
 
-        <!-- Foto 3 (Miring tipis ke kanan/dalam) -->
-        <div onclick="openCertificate('3.jpeg')" class="group relative w-[180px] sm:w-[215px] md:w-[250px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-2xl shrink-0 snap-center rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-300 z-30">
+        <!-- Foto 3 -->
+        <div onclick="openCertificate('3.jpeg')" class="group relative w-[150px] sm:w-[170px] md:w-[210px] aspect-[3/4] rounded-xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-xl shrink-0 snap-center rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-300 z-30">
             <img src="3.jpeg" alt="Dokumentasi 3" class="w-full h-full object-cover">
         </div>
 
-        <!-- Foto 4 (Miring tipis ke kiri/dalam) -->
-        <div onclick="openCertificate('4.jpeg')" class="group relative w-[180px] sm:min-w-[215px] md:w-[250px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-2xl shrink-0 snap-center -rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-300 z-30">
+        <!-- Foto 4 -->
+        <div onclick="openCertificate('4.jpeg')" class="group relative w-[150px] sm:w-[170px] md:w-[210px] aspect-[3/4] rounded-xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-xl shrink-0 snap-center -rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-300 z-30">
             <img src="4.jpeg" alt="Dokumentasi 4" class="w-full h-full object-cover">
         </div>
 
-        <!-- Foto 5 (Miring sedikit ke kiri/dalam) -->
-        <div onclick="openCertificate('5.jpeg')" class="group relative w-[170px] sm:w-[200px] md:w-[235px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-2xl shrink-0 snap-center -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300 z-20">
+        <!-- Foto 5 -->
+        <div onclick="openCertificate('5.jpeg')" class="group relative w-[140px] sm:w-[160px] md:w-[195px] aspect-[3/4] rounded-xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-xl shrink-0 snap-center -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300 z-20">
             <img src="5.jpeg" alt="Dokumentasi 5" class="w-full h-full object-cover">
         </div>
 
-        <!-- Foto 6 (Miring ke kiri/dalam) -->
-        <div onclick="openCertificate('6.jpeg')" class="group relative w-[160px] sm:w-[190px] md:w-[220px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-2xl shrink-0 snap-center -rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-300 z-10">
+        <!-- Foto 6 -->
+        <div onclick="openCertificate('6.jpeg')" class="group relative w-[130px] sm:w-[150px] md:w-[180px] aspect-[3/4] rounded-xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-xl shrink-0 snap-center -rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-300 z-10">
             <img src="6.jpeg" alt="Dokumentasi 6" class="w-full h-full object-cover">
         </div>
 
