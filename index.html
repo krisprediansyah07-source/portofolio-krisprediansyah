@@ -777,29 +777,25 @@ Bagi saya, desain bukan hanya tentang tampilan yang menarik, tetapi juga tentang
                                 <h3 class="text-xl font-bold text-text-primary">Kirim Pesan</h3>
                                 <p class="text-sm text-text-secondary mt-1">Ada tawaran pekerjaan atau diskusi? Kirim pesan langsung!</p>
                             </div>
-                            <form class="flex flex-col gap-4" action="https://api.web3forms.com/submit" method="POST">
-    
-    <!-- Masukkan Access Key yang Anda dapatkan dari email di sini -->
-    <input type="hidden" name="access_key" value="01ec5e2e-81f3-423a-922a-6aee9dcfaf48">
-
+                   <form class="flex flex-col gap-4" onsubmit="sendToWhatsApp(event)">
     <div class="relative flex items-center">
         <span class="material-symbols-outlined absolute left-3.5 text-text-muted text-[18px]">person</span>
-        <input name="name" class="w-full pl-10 pr-4 py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-text-muted text-sm border border-surface-variant/30 focus:border-primary focus:outline-none" placeholder="Nama Anda" required="" type="text"/>
+        <input id="wa-name" class="w-full pl-10 pr-4 py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-text-muted text-sm border border-surface-variant/30 focus:border-primary focus:outline-none" placeholder="Nama Anda" required="" type="text"/>
     </div>
     
     <div class="relative flex items-center">
         <span class="material-symbols-outlined absolute left-3.5 text-text-muted text-[18px]">mail</span>
-        <input name="email" class="w-full pl-10 pr-4 py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-text-muted text-sm border border-surface-variant/30 focus:border-primary focus:outline-none" placeholder="Email Anda" required="" type="email"/>
+        <input id="wa-email" class="w-full pl-10 pr-4 py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-text-muted text-sm border border-surface-variant/30 focus:border-primary focus:outline-none" placeholder="Email Anda" required="" type="email"/>
     </div>
     
     <div class="relative">
         <span class="material-symbols-outlined absolute left-3.5 top-3.5 text-text-muted text-[18px]">chat</span>
-        <textarea name="message" class="w-full pl-10 pr-4 py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-text-muted text-sm border border-surface-variant/30 focus:border-primary focus:outline-none resize-none" placeholder="Pesan Anda" required="" rows="4"></textarea>
+        <textarea id="wa-message" class="w-full pl-10 pr-4 py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-text-muted text-sm border border-surface-variant/30 focus:border-primary focus:outline-none resize-none" placeholder="Pesan Anda" required="" rows="4"></textarea>
     </div>
     
     <button class="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-primary-container hover:bg-primary text-on-primary-container text-sm font-bold transition-all shadow-[0_0_20px_rgba(77,142,255,0.4)]" type="submit">
         <span class="material-symbols-outlined text-[18px]">send</span>
-        <span>Kirim Pesan</span>
+        <span>Kirim via WhatsApp</span>
     </button>
 </form>
                         </div>
@@ -1104,6 +1100,19 @@ Bagi saya, desain bukan hanya tentang tampilan yang menarik, tetapi juga tentang
                 btn.innerHTML = originalText;
                 btn.classList.remove('bg-secondary');
             }, 2800);
+            function sendToWhatsApp(event) {
+    event.preventDefault();
+    const name = document.getElementById('wa-name').value;
+    const email = document.getElementById('wa-email').value;
+    const message = document.getElementById('wa-message').value;
+    
+    // Nomor WhatsApp Anda (awali dengan 62 tanpa angka 0 di depan)
+    const phoneNumber = "62895618222221"; 
+    
+    const text = `Halo Kris, saya ${name} (Email: ${email}). %0A%0APesan: ${message}`;
+    
+    window.open(`https://wa.me/${phoneNumber}?text=${text}`, '_blank');
+}
         }
     </script>
 </body>
