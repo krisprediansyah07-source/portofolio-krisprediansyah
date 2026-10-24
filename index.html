@@ -23,8 +23,7 @@
         body {
             background-color: #05070f !important;
             background-image: 
-                radial-gradient(white, rgba(255,255,255,.25) 2px, transparent 4px),
-                radial-gradient(white, rgba(255,255,255,.12) 1px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.25) 2px, transparent 4px),                radial-gradient(white, rgba(255,255,255,.12) 1px, transparent 3px),
                 radial-gradient(rgba(77,142,255,0.4), transparent 2px) !important;
             background-size: 550px 550px, 350px 350px, 250px 250px;
             background-position: 0 0, 40px 60px, 130px 270px;
@@ -762,7 +761,48 @@ Bagi saya, desain bukan hanya tentang tampilan yang menarik, tetapi juga tentang
 
 </div>
             </section>
+<!-- SECTION: GALERI DOKUMENTASI (SCROLL KE SAMPING) -->
+<div class="flex flex-col gap-6 my-10">
+    <div class="text-center flex flex-col items-center gap-2">
+        <span class="text-xs text-primary tracking-widest uppercase font-bold">Moments & Memories</span>
+        <h3 class="text-2xl md:text-3xl font-bold text-text-primary">Dokumentasi Kegiatan</h3>
+    </div>
 
+    <!-- Container dengan Scroll Horizontal -->
+    <div class="flex gap-4 overflow-x-auto pb-4 pt-2 px-2 no-scrollbar snap-x snap-mandatory">
+        
+        <!-- Foto 1 -->
+        <div onclick="openCertificate('foto1.jpg')" class="group relative min-w-[200px] sm:min-w-[240px] md:min-w-[280px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-lg shrink-0 snap-center transition-transform hover:scale-105">
+            <img src="foto1.jpg" alt="Dokumentasi 1" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Foto 2 -->
+        <div onclick="openCertificate('foto2.jpg')" class="group relative min-w-[200px] sm:min-w-[240px] md:min-w-[280px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-lg shrink-0 snap-center transition-transform hover:scale-105">
+            <img src="foto2.jpg" alt="Dokumentasi 2" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Foto 3 -->
+        <div onclick="openCertificate('foto3.jpg')" class="group relative min-w-[200px] sm:min-w-[240px] md:min-w-[280px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-lg shrink-0 snap-center transition-transform hover:scale-105">
+            <img src="foto3.jpg" alt="Dokumentasi 3" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Foto 4 -->
+        <div onclick="openCertificate('foto4.jpg')" class="group relative min-w-[200px] sm:min-w-[240px] md:min-w-[280px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-lg shrink-0 snap-center transition-transform hover:scale-105">
+            <img src="foto4.jpg" alt="Dokumentasi 4" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Foto 5 -->
+        <div onclick="openCertificate('foto5.jpg')" class="group relative min-w-[200px] sm:min-w-[240px] md:min-w-[280px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-lg shrink-0 snap-center transition-transform hover:scale-105">
+            <img src="foto5.jpg" alt="Dokumentasi 5" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Foto 6 -->
+        <div onclick="openCertificate('foto6.jpg')" class="group relative min-w-[200px] sm:min-w-[240px] md:min-w-[280px] aspect-[3/4] rounded-2xl overflow-hidden bg-surface-card border border-surface-container/50 cursor-pointer shadow-lg shrink-0 snap-center transition-transform hover:scale-105">
+            <img src="foto6.jpg" alt="Dokumentasi 6" class="w-full h-full object-cover">
+        </div>
+
+    </div>
+</div>
             <!-- SECTION 4: CONTACT & GUESTBOOK -->
             <section class="flex flex-col gap-10 scroll-mt-24" id="contact">
                 <div class="text-center flex flex-col items-center gap-2">
