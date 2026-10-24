@@ -1,0 +1,12 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: #000; color: #fff; font-family: Arial, Helvetica, sans-serif; }
+body { min-height: 100vh; }
+.scene-page { position: relative; width: 100%; min-height: 100vh; overflow: hidden; background: #000; }
+.responsive-wrapper { width: 100%; height: 100vh; min-height: 440px; display: flex; justify-content: center; align-items: center; transform: scale(1); transform-origin: center; }
+.responsive-wrapper canvas { display: block; width: 100%; height: 100%; touch-action: none; outline: none; }
+.back-link { position: absolute; z-index: 2; top: 22px; left: 24px; color: #ddd; text-decoration: none; font-size: 14px; opacity: .8; }
+.back-link:hover { opacity: 1; }
+.hint { position: absolute; z-index: 2; left: 16px; right: 16px; bottom: 22px; margin: 0; text-align: center; color: #aaa; font-size: 13px; pointer-events: none; }
+.status { position: absolute; z-index: 2; left: 16px; right: 16px; top: 50%; margin: 0; text-align: center; color: #aaa; font-size: 13px; pointer-events: none; }
+.status:empty { display: none; }
+@media (max-width: 600px) { .back-link { top: 16px; left: 16px; } .responsive-wrapper { min-height: 360px; } .hint { bottom: 16px; font-size: 12px; } }

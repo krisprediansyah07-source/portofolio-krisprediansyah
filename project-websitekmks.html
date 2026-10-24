@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Sistem Informasi KMKS — Kris Prediansyah</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+    
+    <style>
+        @layer base{
+            html { margin: 0; padding: 0; }
+            body { margin: 0; padding: 0; overflow-x: hidden; }
+            main>:first-child{margin-top:0!important;}
+            main>:last-child{margin-bottom:0!important;}
+        }
+        ::-webkit-scrollbar{display:none;}
+        
+        /* Animasi Bintang Luar Angkasa (Starfield) */
+        body {
+            background-color: #05070f !important;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.25) 2px, transparent 4px),
+                radial-gradient(white, rgba(255,255,255,.12) 1px, transparent 3px),
+                radial-gradient(rgba(77,142,255,0.4), transparent 2px) !important;
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            animation: animateStars 50s linear infinite;
+        }
+        @keyframes animateStars {
+            from { background-position: 0 0, 40px 60px, 130px 270px; }
+            to { background-position: 0 1000px, 40px 1060px, 130px 1270px; }
+        }
+
+        #preloader.preloader-hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+    </style>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#262a35",
+                        "surface-container": "#1c1f2a",
+                        "surface-card-hover": "#131c31",
+                        "surface-container-lowest": "#0a0e18",
+                        "surface-variant": "#313440",
+                        "on-surface": "#e0e2f1",
+                        "primary-container": "#4d8eff",
+                        "on-primary-container": "#00285d",
+                        "primary": "#adc6ff",
+                        "secondary": "#7bd0ff",
+                        "surface-card": "#0c1322",
+                        "surface-base": "#05070f",
+                        "text-primary": "#f8fafc",
+                        "text-secondary": "#94a3b8",
+                        "text-muted": "#64748b"
+                    },
+                    spacing: {
+                        "gutter-mobile": "1.5rem",
+                        "gutter": "2rem"
+                    },
+                    fontFamily: {
+                        "body-md": ["Inter", "sans-serif"],
+                        "headline-xl": ["Lora", "serif"]
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="bg-surface-base font-body-md text-on-surface min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+
+    <!-- PRELOADER -->
+    <div class="fixed inset-0 z-[9999] flex flex-col justify-between items-center bg-[#0a0e18] px-6 py-8 transition-transform duration-700 ease-in-out" id="preloader">
+        <div class="w-full max-w-[1180px] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+                <span class="text-xs uppercase tracking-wider text-text-muted font-bold">Loading System</span>
+            </div>
+        </div>
+        <div class="flex flex-col items-center gap-6 text-center my-auto">
+            <div class="relative flex items-center justify-center">
+                <div class="absolute -inset-4 bg-primary/25 rounded-3xl blur-2xl animate-pulse"></div>
+                <div class="relative w-20 h-20 rounded-2xl bg-surface-card border border-primary/30 flex items-center justify-center text-primary text-3xl font-extrabold shadow-[0_0_40px_rgba(77,142,255,0.35)]">KP</div>
+            </div>
+            <div class="h-10 flex items-center justify-center overflow-hidden">
+                <h2 class="text-2xl font-bold text-text-primary tracking-tight transition-all duration-300" id="preloader-greeting">Memuat Detail</h2>
+            </div>
+        </div>
+        <div class="w-full max-w-sm flex flex-col gap-3">
+            <div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-75 ease-out rounded-full" id="preloader-bar" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR PILL GLASSMORPHISM -->
+    <header class="fixed top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
+        <div class="max-w-[1180px] w-full flex items-center justify-between pointer-events-auto">
+            <div class="flex items-center gap-2 bg-surface-card/80 backdrop-blur-xl px-3 py-1.5 rounded-full border border-white/10 shadow-lg hidden md:flex">
+                <div class="w-8 h-8 rounded-xl bg-surface-container flex items-center justify-center text-primary font-bold text-xs">KP</div>
+                <span class="font-bold tracking-tight text-on-surface text-sm pr-2">Kris Prediansyah</span>
+            </div>
+            
+            <nav class="bg-[#11131e]/80 backdrop-blur-xl border border-white/10 p-1.5 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center gap-1 mx-auto md:mx-0">
+                <a href="index.html" class="px-4 py-2 rounded-full text-slate-400 hover:text-white hover:bg-white/5 font-medium text-xs md:text-sm transition-all">Home</a>
+                <a href="index.html#portfolio" class="px-4 py-2 rounded-full bg-white/10 text-white font-semibold text-xs md:text-sm transition-all">Portfolio</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-2">
+                <a href="index.html#contact" class="px-5 py-2 rounded-full bg-primary-container text-on-primary-container font-bold text-sm shadow-md hover:bg-primary transition-all">Hire Me</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="w-full pt-28 pb-10 bg-transparent relative min-h-screen">
+        <!-- Glow background effects -->
+        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-primary/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+        
+        <div class="max-w-[1000px] mx-auto px-gutter-mobile md:px-gutter flex flex-col gap-10">
+            
+            <!-- BUTTON KEMBALI -->
+            <div>
+                <a href="index.html#portfolio" class="inline-flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm font-semibold">
+                    <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                    <span>Kembali ke Portfolio</span>
+                </a>
+            </div>
+
+            <!-- HEADER PROJECT -->
+            <section class="flex flex-col gap-6">
+                <div class="flex flex-col gap-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container w-fit border border-surface-variant/50">
+                        <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+                        <span class="text-xs text-secondary font-semibold">Tugas Akhir / Skripsi</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-headline-xl font-bold text-text-primary leading-tight">
+                        Sistem Informasi Tata Kelola KMKS
+                    </h1>
+                    <p class="text-lg text-text-secondary leading-relaxed max-w-3xl">
+                        Platform tata kelola digital terpadu untuk Komite Mahasiswa Kabupaten Sambas yang mengintegrasikan manajemen keanggotaan, kepanitiaan, E-Registrasi kegiatan masif, dan transparansi laporan (LPJ) ke dalam satu ekosistem web berbasis Laravel.
+                    </p>
+                </div>
+
+                <!-- PROJECT METADATA -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-surface-variant/30">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-xs text-text-muted uppercase tracking-wider font-bold">Role</span>
+                        <span class="text-sm font-semibold text-text-primary">Fullstack Developer & Analyst</span>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span class="text-xs text-text-muted uppercase tracking-wider font-bold">Tech Stack</span>
+                        <span class="text-sm font-semibold text-text-primary">Laravel, MySQL, Tailwind CSS</span>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span class="text-xs text-text-muted uppercase tracking-wider font-bold">Tahun</span>
+                        <span class="text-sm font-semibold text-text-primary">2026</span>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span class="text-xs text-text-muted uppercase tracking-wider font-bold">Metode</span>
+                        <span class="text-sm font-semibold text-primary">Rapid Application Development (RAD)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GAMBAR HERO PROJECT -->
+            <section class="w-full">
+                <div class="w-full aspect-[16/9] md:aspect-[21/9] bg-surface-card rounded-3xl overflow-hidden border border-surface-container/50 shadow-2xl relative" data-tilt data-tilt-max="2" data-tilt-speed="400">
+                    <img src="Websitekmks.png" alt="Sistem Informasi KMKS Dashboard" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop'"/>
+                </div>
+            </section>
+
+            <!-- KONTEN DETAIL PROJECT -->
+            <section class="grid grid-cols-1 md:grid-cols-12 gap-10 mt-4">
+                
+                <!-- Kiri: Penjelasan Detail -->
+                <div class="md:col-span-8 flex flex-col gap-8">
+                    <div class="flex flex-col gap-4">
+                        <h3 class="text-2xl font-bold text-text-primary">Latar Belakang & Masalah</h3>
+                        <p class="text-sm text-text-secondary leading-relaxed">
+                            Komite Mahasiswa Kabupaten Sambas (KMKS) secara rutin menyelenggarakan agenda masif tahunan seperti Tryout UTBK, Posko Camaba, dan festival Bubor Paddas dengan keterlibatan mencapai 1.500 - 2.000 peserta. Namun, tata kelola operasional sebelumnya masih menggunakan pencatatan manual berbasis <i>spreadsheet</i> dan grup WhatsApp.
+                        </p>
+                        <p class="text-sm text-text-secondary leading-relaxed">
+                            Pendekatan manual ini menimbulkan berbagai kendala, di antaranya rentan terhadap duplikasi data pendaftaran, lambatnya penyebaran informasi kepanitiaan, hingga keterlambatan dalam penyusunan Laporan Pertanggungjawaban (LPJ) karena bukti fisik nota pengeluaran rawan hilang. Risiko terbesarnya adalah rekam jejak operasional organisasi yang terus hilang setiap terjadinya pergantian kepengurusan.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <h3 class="text-2xl font-bold text-text-primary">Proses Pengembangan & Hasil Pengujian</h3>
+                        <p class="text-sm text-text-secondary leading-relaxed">
+                            Sistem ini dirancang menggunakan <b>Metode Rapid Application Development (RAD)</b> untuk memastikan pengembangan berjalan cepat dan adaptif terhadap <i>feedback</i> dari para pengurus KMKS. Desain awal (*wireframe* & UI) dibuat menggunakan Figma, sebelum diintegrasikan menggunakan <b>Framework Laravel</b> dan basis data MySQL yang menggunakan konsep keamanan akses bertingkat (Role-Based Access Control).
+                        </p>
+                        <p class="text-sm text-text-secondary leading-relaxed">
+                            <b>Hasil Pengujian:</b><br/>
+                            Melalui <i>Black Box Testing</i>, seluruh fungsi mulai dari validasi peserta, otomatisasi notifikasi via WhatsApp, hingga pencetakan LPJ terbukti berjalan valid 100%. Lebih lanjut, evaluasi kelayakan menggunakan <i>User Acceptance Testing (UAT)</i> yang melibatkan 55 responden menghasilkan skor kelayakan <b>89,00%</b> dari sisi operasional, dan <b>88,80%</b> dari sisi manajerial BPH Inti. Sistem dinyatakan <b>Sangat Layak</b> untuk mendigitalisasi birokrasi KMKS.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Kanan: Fitur Utama & Tools -->
+                <div class="md:col-span-4 flex flex-col gap-6">
+                    <!-- Card Fitur -->
+                    <div class="bg-surface-card/60 backdrop-blur-xl rounded-2xl p-6 border border-surface-container shadow-lg">
+                        <h4 class="text-base font-bold text-text-primary mb-4 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">star</span> Modul & Fitur Utama
+                        </h4>
+                        <ul class="flex flex-col gap-3">
+                            <li class="flex items-start gap-2 text-sm text-text-secondary">
+                                <span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+                                <b>Manajemen Anggota:</b> Kelola data demisioner, penugasan (plotting) divisi, & screening panitia.
+                            </li>
+                            <li class="flex items-start gap-2 text-sm text-text-secondary">
+                                <span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+                                <b>E-Registrasi Kegiatan:</b> Pendataan online, otomatisasi E-Resi PDF, & integrasi notifikasi WA.
+                            </li>
+                            <li class="flex items-start gap-2 text-sm text-text-secondary">
+                                <span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+                                <b>Portal Publik & E-Aspirasi:</b> Wadah komunikasi rilis berita, pengumuman, dan penerimaan aduan publik.
+                            </li>
+                            <li class="flex items-start gap-2 text-sm text-text-secondary">
+                                <span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+                                <b>Pelaporan (LPJ) Otomatis:</b> Arsip nota digital, rekap absensi, & Export dokumen ke format PDF/Excel.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Card Tools -->
+                    <div class="bg-surface-card/60 backdrop-blur-xl rounded-2xl p-6 border border-surface-container shadow-lg">
+                        <h4 class="text-base font-bold text-text-primary mb-4 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">handyman</span> Tools & Framework
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-surface-container text-xs text-text-primary font-medium border border-surface-variant/50">Laravel (PHP)</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-surface-container text-xs text-text-primary font-medium border border-surface-variant/50">MySQL</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-surface-container text-xs text-text-primary font-medium border border-surface-variant/50">Tailwind CSS</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-surface-container text-xs text-text-primary font-medium border border-surface-variant/50">Figma (UI/UX)</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-surface-container text-xs text-text-primary font-medium border border-surface-variant/50">WhatsApp API</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- NAVIGASI BAWAH -->
+            <div class="flex items-center justify-between pt-10 pb-6 border-t border-surface-variant/30 mt-10">
+                <a href="index.html#portfolio" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-surface-card border border-surface-variant/50 hover:bg-surface-card-hover text-text-primary text-sm transition-all duration-300 shadow-md">
+                    <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                    <span>Kembali ke Beranda</span>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="w-full bg-surface-container-lowest/80 backdrop-blur-xl py-10 border-t border-surface-container">
+        <div class="max-w-[1180px] mx-auto px-gutter-mobile md:px-gutter flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <span class="text-lg font-bold text-on-surface">Kris Prediansyah</span>
+                <p class="text-sm text-text-muted text-center md:text-left">© 2026 Kris Prediansyah. Pontianak, Kalimantan Barat.</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <a class="w-12 h-12 rounded-full bg-surface-card border border-surface-container flex items-center justify-center text-text-secondary hover:text-primary transition-transform hover:scale-110" href="https://instagram.com/k.frdisyh" target="_blank">
+                    <span class="material-symbols-outlined">photo_camera</span>
+                </a>
+                <a class="w-12 h-12 rounded-full bg-surface-card border border-surface-container flex items-center justify-center text-text-secondary hover:text-primary transition-transform hover:scale-110" href="mailto:Krisprediansyah99@gmail.com">
+                    <span class="material-symbols-outlined">mail</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vanilla Tilt JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+    <script>
+        // PRELOADER LOGIC
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            const barEl = document.getElementById('preloader-bar');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 20;
+                if(barEl) barEl.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.classList.add('preloader-hidden');
+                        setTimeout(() => { preloader.style.display = 'none'; }, 850);
+                    }, 300);
+                }
+            }, 50);
+        });
+    </script>
+</body>
+</html>

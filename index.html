@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Kris Prediansyah — UI/UX Designer & Creative Technologist</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+    
+    <style>
+        @layer base{
+            html { margin: 0; padding: 0; }
+            body { margin: 0; padding: 0; overflow-x: hidden; }
+            main>:first-child{margin-top:0!important;}
+            main>:last-child{margin-bottom:0!important;}
+        }
+        ::-webkit-scrollbar{display:none;}
+        
+        /* Animasi Bintang Luar Angkasa (Starfield) */
+        body {
+            background-color: #05070f !important;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.25) 2px, transparent 4px),
+                radial-gradient(white, rgba(255,255,255,.12) 1px, transparent 3px),
+                radial-gradient(rgba(77,142,255,0.4), transparent 2px) !important;
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            animation: animateStars 50s linear infinite;
+        }
+        @keyframes animateStars {
+            from { background-position: 0 0, 40px 60px, 130px 270px; }
+            to { background-position: 0 1000px, 40px 1060px, 130px 1270px; }
+        }
+
+        #preloader.preloader-hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* ANIMASI BORDER CAHAYA BERPUTAR (MODERN GLOW) */
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @keyframes spin-border {
+            0% { --angle: 0deg; }
+            100% { --angle: 360deg; }
+        }
+
+        .glowing-card {
+            position: relative;
+            border-radius: 1.5rem;
+            background: #0c1322;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .glowing-card::after, .glowing-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 1.6rem;
+            background: conic-gradient(from var(--angle), transparent 60%, #1DB954 80%, #7bd0ff 90%, #ffffff 100%);
+            z-index: -1;
+            animation: spin-border 4s linear infinite;
+        }
+
+        .glowing-card::before {
+            filter: blur(12px);
+            opacity: 0.6;
+        }
+    </style>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#262a35",
+                        "surface-container": "#1c1f2a",
+                        "surface-card-hover": "#131c31",
+                        "surface-container-lowest": "#0a0e18",
+                        "surface-variant": "#313440",
+                        "on-surface": "#e0e2f1",
+                        "primary-container": "#4d8eff",
+                        "on-primary-container": "#00285d",
+                        "primary": "#adc6ff",
+                        "secondary": "#7bd0ff",
+                        "surface-card": "#0c1322",
+                        "surface-base": "#05070f",
+                        "text-primary": "#f8fafc",
+                        "text-secondary": "#94a3b8",
+                        "text-muted": "#64748b"
+                    },
+                    spacing: {
+                        "gutter-mobile": "1.5rem",
+                        "gutter": "2rem",
+                        "space-xl": "3rem"
+                    },
+                    fontFamily: {
+                        "body-lg": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "display-hero-mobile": ["Lora", "serif"],
+                        "display-hero": ["Lora", "serif"],
+                        "headline-stat": ["Lora", "serif"],
+                        "headline-lg": ["Lora", "serif"],
+                        "headline-xl": ["Lora", "serif"],
+                        "headline-md": ["Lora", "serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="bg-surface-base font-body-md text-on-surface min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+
+    <!-- PRELOADER -->
+    <div class="fixed inset-0 z-[9999] flex flex-col justify-between items-center bg-[#0a0e18] px-6 py-8 transition-transform duration-700 ease-in-out" id="preloader">
+        <div class="w-full max-w-[1180px] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+                <span class="text-xs uppercase tracking-wider text-text-muted font-bold">Loading System</span>
+            </div>
+            <button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container/80 text-text-muted hover:text-on-surface transition-all text-xs" onclick="dismissPreloader()">
+                <span>Skip</span>
+                <span>✕</span>
+            </button>
+        </div>
+        
+        <div class="flex flex-col items-center gap-6 text-center my-auto">
+            <div class="relative flex items-center justify-center">
+                <div class="absolute -inset-4 bg-primary/25 rounded-3xl blur-2xl animate-pulse"></div>
+                <div class="relative w-20 h-20 rounded-2xl bg-surface-card border border-primary/30 flex items-center justify-center text-primary text-3xl font-extrabold shadow-[0_0_40px_rgba(77,142,255,0.35)]">KP</div>
+            </div>
+            <div class="h-10 flex items-center justify-center overflow-hidden">
+                <h2 class="text-2xl font-bold text-text-primary tracking-tight transition-all duration-300" id="preloader-greeting">Hello</h2>
+            </div>
+            <p class="text-xs text-text-muted tracking-widest uppercase">UI/UX Designer • Creative Technologist</p>
+        </div>
+        
+        <div class="w-full max-w-sm flex flex-col gap-3">
+            <div class="flex items-center justify-between text-xs">
+                <span class="text-text-muted">Initializing Modules</span>
+                <span class="font-bold text-primary font-mono" id="preloader-percent">0%</span>
+            </div>
+            <div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-75 ease-out rounded-full shadow-[0_0_12px_rgba(77,142,255,0.8)]" id="preloader-bar" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="fixed top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
+        <div class="max-w-[1180px] w-full flex items-center justify-between pointer-events-auto">
+            <div class="flex items-center gap-2 bg-surface-card/80 backdrop-blur-xl px-3 py-1.5 rounded-full border border-white/10 shadow-lg hidden md:flex">
+                <div class="w-8 h-8 rounded-xl bg-surface-container flex items-center justify-center text-primary font-bold text-xs">KP</div>
+                <span class="font-bold tracking-tight text-on-surface text-sm pr-2">Kris Prediansyah</span>
+            </div>
+            
+            <nav class="bg-[#11131e]/80 backdrop-blur-xl border border-white/10 p-1.5 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center gap-1 mx-auto md:mx-0">
+                <a href="#" class="px-4 py-2 rounded-full bg-white/10 text-white font-semibold text-xs md:text-sm transition-all">Home</a>
+                <a href="#about" class="px-4 py-2 rounded-full text-slate-400 hover:text-white hover:bg-white/5 font-medium text-xs md:text-sm transition-all">About</a>
+                <a href="#portfolio" class="px-4 py-2 rounded-full text-slate-400 hover:text-white hover:bg-white/5 font-medium text-xs md:text-sm transition-all">Portfolio</a>
+                <a href="#contact" class="px-4 py-2 rounded-full text-slate-400 hover:text-white hover:bg-white/5 font-medium text-xs md:text-sm transition-all">Contact</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-2">
+                <a href="#contact" class="px-5 py-2 rounded-full bg-primary-container text-on-primary-container font-bold text-sm shadow-md hover:bg-primary transition-all">Hire Me</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="w-full pt-28 pb-10 bg-transparent relative min-h-screen overflow-hidden">
+        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-primary/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+        <div class="absolute top-[1400px] right-0 w-[500px] h-[350px] bg-secondary/10 rounded-full blur-[130px] pointer-events-none -z-10"></div>
+        
+        <div class="max-w-[1180px] mx-auto px-gutter-mobile md:px-gutter flex flex-col gap-24 md:gap-36">
+            
+            <!-- SECTION 1: HERO -->
+            <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[70vh]">
+                <div class="lg:col-span-7 flex flex-col items-start gap-6 relative z-10">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-card/90 shadow-sm border border-surface-container">
+                        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        <span class="text-xs text-primary tracking-wider uppercase font-semibold">Available for Work</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <h1 class="text-4xl md:text-6xl font-display-hero font-extrabold tracking-tight text-text-primary leading-tight">
+                            Turning <span class="bg-gradient-to-r from-primary via-secondary to-primary-container bg-clip-text text-transparent">Ideas</span><br/>Into Reality
+                        </h1>
+                        <p class="text-lg md:text-xl text-primary font-semibold mt-4">
+                            UI/UX Designer & Creative Visual Content
+                        </p>
+                    </div>
+                    <p class="text-base text-text-secondary max-w-xl leading-relaxed">
+                        Lulusan Sistem Informasi Universitas Muhammadiyah Pontianak yang berfokus pada Desain Grafis, Pembuatan Konten Visual, Video, serta Web Development. Berpengalaman mengelola materi promosi dan UI/UX interaktif.
+                    </p>
+                    
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <a class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-primary-container hover:bg-primary text-on-primary-container font-bold text-sm transition-all duration-300 shadow-[0_0_24px_rgba(77,142,255,0.45)] hover:-translate-y-1" href="#portfolio">
+                            <span>Explore Works</span>
+                            <span class="material-symbols-outlined text-[18px]">arrow_outward</span>
+                        </a>
+                        <a class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-surface-card hover:bg-surface-card-hover text-on-surface font-bold text-sm transition-all duration-200 shadow-sm border border-surface-container" href="#contact">
+                            <span>Contact Me</span>
+                            <span class="material-symbols-outlined text-[18px] text-text-muted">chevron_right</span>
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 pt-4">
+                        <span class="text-xs text-text-muted uppercase tracking-widest font-bold">Find Me</span>
+                        <div class="flex items-center gap-2">
+                            <a class="w-10 h-10 rounded-xl bg-surface-card hover:bg-surface-card-hover border border-surface-container flex items-center justify-center transition-all hover:scale-110" href="https://www.instagram.com/k.frdisyh" target="_blank">
+                                <img src="logo-ig.png" alt="IG" class="w-5 h-5 object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1384/1384063.png'"/>
+                            </a>
+                            <a class="w-10 h-10 rounded-xl bg-surface-card hover:bg-surface-card-hover border border-surface-container flex items-center justify-center transition-all hover:scale-110" href="mailto:Krisprediansyah99@gmail.com">
+                                <img src="logoemail.png" alt="Email" class="w-5 h-5 object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/732/732200.png'"/>
+                            </a>
+                            <a class="w-10 h-10 rounded-full bg-surface-card hover:bg-surface-card-hover border border-surface-container flex items-center justify-center transition-all hover:scale-110" href="https://id.linkedin.com/in/kris-prediansyah-247ab03b3" target="_blank">
+                                <img src="loglink.png" alt="LinkedIn" class="w-5 h-5 object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/174/174857.png'"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="lg:col-span-5 w-full flex flex-col justify-center items-center relative z-20">
+                    <!-- KOTAK SPOTIFY GLOWING -->
+                    <div class="glowing-card w-full h-[352px] relative flex flex-col justify-end items-center p-3 pb-4 z-20" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
+                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4cOdK2wGLETKBW3PvgPWqT?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+
+                    <!-- Daily Routine Card -->
+                    <div class="w-full bg-surface-card/90 backdrop-blur-xl rounded-2xl p-6 shadow-xl flex flex-col gap-4 border border-surface-container/50 transform -mt-10 z-30 md:ml-[-100px] relative" data-tilt data-tilt-max="10" data-tilt-speed="300">
+                        <div class="flex items-center justify-between pb-4 border-b border-surface-container">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-[22px]">brush</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-bold text-text-primary">Daily Routine</h3>
+                                    <p class="text-xs text-text-muted">Designing & Building</p>
+                                </div>
+                            </div>
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container text-xs text-secondary border border-secondary/20">
+                                <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+                                Active
+                            </span>
+                        </div>
+                        <div class="bg-surface-container-lowest/90 rounded-xl p-3 flex items-center gap-3 border border-surface-variant/30">
+                            <div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary border border-primary/20">
+                                <span class="material-symbols-outlined text-2xl">design_services</span>
+                            </div>
+                            <div class="flex flex-col flex-1 min-w-0">
+                                <span class="text-sm font-bold text-text-primary truncate">Creative Consultant</span>
+                                <span class="text-xs text-text-secondary truncate">UI/UX & Laravel</span>
+                                <div class="w-full bg-surface-variant h-1 rounded-full mt-2">
+                                    <div class="bg-gradient-to-r from-primary to-secondary h-full w-4/5 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: ABOUT ME -->
+            <section class="flex flex-col gap-10 scroll-mt-32" id="about">
+                <div class="text-center flex flex-col items-center gap-2">
+                    <span class="text-xs text-primary tracking-widest uppercase font-bold">Biography & Track Record</span>
+                    <h2 class="text-3xl md:text-4xl font-headline-xl font-bold text-text-primary">About Me</h2>
+                </div>
+                
+                <div class="bg-surface-card/60 backdrop-blur-md rounded-3xl p-6 md:p-10 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-surface-container/60">
+                    <div class="lg:col-span-4 flex flex-col gap-4 order-2 lg:order-1">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container w-fit border border-surface-variant/50">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                            <span class="text-xs text-primary font-semibold">S1 Sistem Informasi</span>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-text-primary leading-tight">
+                            Hi, I'm <br/><span class="text-primary">Kris Prediansyah</span>
+                        </h3>
+                        <p class="text-sm text-text-secondary leading-relaxed">
+                            Lulusan S1 Sistem Informasi Universitas Muhammadiyah Pontianak yang berfokus pada Desain Grafis, Pembuatan Konten Visual, Video, dan UI/UX dan juga Pengembangan System yang dibutuhkan untuk mempercepat Operasional.
+                        </p>
+                        <div class="pt-2">
+                            <a class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-container text-on-primary-container hover:bg-primary text-sm font-bold transition-all shadow-lg" href="#contact">
+                                <span class="material-symbols-outlined text-[18px]">description</span>
+                                <span>Download Resume</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-4 flex justify-center order-1 lg:order-2">
+                        <div class="relative w-64 md:w-72 aspect-[3/4] rounded-2xl overflow-hidden bg-surface-container flex flex-col items-center justify-center shadow-2xl border border-primary/20 group cursor-pointer" data-tilt data-tilt-scale="1.05" data-tilt-glare="true" data-tilt-max-glare="0.3">
+                            <div class="absolute -inset-1 bg-gradient-to-t from-primary/30 to-secondary/10 rounded-2xl blur-lg pointer-events-none"></div>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center z-10 transition-opacity duration-500 group-hover:opacity-0">
+                                <img src="foto-saya.jpg.jpg" alt="Kris Prediansyah" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop'"/>
+                            </div>
+                            <div class="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 z-20">
+                                <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?q=80&w=600&auto=format&fit=crop" alt="Hover Persona" class="w-full h-full object-cover"/>
+                                <div class="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent opacity-70"></div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="lg:col-span-4 flex flex-col gap-5 order-3">
+                        <div class="bg-surface-container/70 rounded-2xl p-5 flex flex-col gap-2 border border-surface-variant/40 transition-transform hover:-translate-y-1">
+                            <div class="flex items-center gap-2 text-primary font-bold">
+                                <span class="material-symbols-outlined text-[20px]">architecture</span>
+                                <span>Design & Creativity</span>
+                            </div>
+                            <p class="text-sm text-text-secondary leading-relaxed">
+                                Terbiasa mengoperasikan Adobe Photoshop, Canva, Figma, CapCut, dan AI Tools untuk menghasilkan konten visual kreatif yang relevan.
+                            </p>
+                        </div>
+                        <div class="bg-surface-container/70 rounded-2xl p-5 flex flex-col gap-2 border border-surface-variant/40 transition-transform hover:-translate-y-1">
+                            <div class="flex items-center gap-2 text-secondary font-bold">
+                                <span class="material-symbols-outlined text-[20px]">groups</span>
+                                <span>Leadership </span>
+                            </div>
+                            <p class="text-sm text-text-secondary leading-relaxed">
+                                Aktif berkontribusi dalam berbagai organisasi kemahasiswaan dan sering mengambil peran kepemimpinan strategis, di antaranya dipercaya sebagai Menteri Luar Negeri BEM UMP, Kepala Bidang Internal Komite Mahasiswa Kabupaten Sambas, Kepala Bidang Penalaran dan Keilmuan serta Organisasi lainnya.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Counters -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 pt-2">
+                    <div class="bg-surface-card border border-surface-container/40 rounded-2xl p-5 flex flex-col justify-between" data-tilt data-tilt-scale="1.05">
+                        <span class="material-symbols-outlined text-primary text-3xl">task_alt</span>
+                        <div class="mt-4 flex flex-col">
+                            <span class="text-3xl font-bold text-text-primary">10+</span>
+                            <span class="text-xs text-text-muted uppercase tracking-wider font-semibold mt-1">Projects Done</span>
+                        </div>
+                    </div>
+                    <div class="bg-surface-card border border-surface-container/40 rounded-2xl p-5 flex flex-col justify-between" data-tilt data-tilt-scale="1.05">
+                        <span class="material-symbols-outlined text-secondary text-3xl">construction</span>
+                        <div class="mt-4 flex flex-col">
+                            <span class="text-3xl font-bold text-text-primary">6+</span>
+                            <span class="text-xs text-text-muted uppercase tracking-wider font-semibold mt-1">Tools Mastery</span>
+                        </div>
+                    </div>
+                    <div class="bg-surface-card border border-surface-container/40 rounded-2xl p-5 flex flex-col justify-between" data-tilt data-tilt-scale="1.05">
+                        <span class="material-symbols-outlined text-primary text-3xl">verified</span>
+                        <div class="mt-4 flex flex-col">
+                            <span class="text-3xl font-bold text-text-primary">3+</span>
+                            <span class="text-xs text-text-muted uppercase tracking-wider font-semibold mt-1">Certifications</span>
+                        </div>
+                    </div>
+                    <div class="bg-surface-card border border-surface-container/40 rounded-2xl p-5 flex flex-col justify-between" data-tilt data-tilt-scale="1.05">
+                        <span class="material-symbols-outlined text-secondary text-3xl">groups</span>
+                        <div class="mt-4 flex flex-col">
+                            <span class="text-3xl font-bold text-text-primary">3</span>
+                            <span class="text-xs text-text-muted uppercase tracking-wider font-semibold mt-1">Organizations</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: PORTOFOLIO -->
+            <section class="flex flex-col gap-8 scroll-mt-32" id="portfolio">
+                <div class="flex flex-col items-center gap-6">
+                    <div class="text-center flex flex-col items-center gap-2">
+                        <span class="text-xs text-primary tracking-widest uppercase font-bold">Featured Showcase</span>
+                        <h2 class="text-3xl md:text-4xl font-headline-xl font-bold text-text-primary">Portofolio</h2>
+                    </div>
+                    
+                    <div class="bg-surface-card/90 backdrop-blur-xl p-1.5 rounded-full shadow-lg flex items-center flex-wrap justify-center gap-1 border border-surface-variant/30">
+                        <button class="portfolio-tab px-5 py-2 rounded-full text-sm bg-primary-container text-on-primary-container font-semibold transition-all" id="tab-projects" onclick="switchTab('projects')">
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">draw</span> Projects</span>
+                        </button>
+                        <button class="portfolio-tab px-5 py-2 rounded-full text-sm text-text-muted hover:text-on-surface transition-all" id="tab-certificates" onclick="switchTab('certificates')">
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">workspace_premium</span> Certificates</span>
+                        </button>
+                        <button class="portfolio-tab px-5 py-2 rounded-full text-sm text-text-muted hover:text-on-surface transition-all" id="tab-awards" onclick="switchTab('awards')">
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">corporate_fare</span> Organisasi</span>
+                        </button>
+                        <button class="portfolio-tab px-5 py-2 rounded-full text-sm text-text-muted hover:text-on-surface transition-all" id="tab-tech" onclick="switchTab('tech')">
+                            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">build</span> Tech Stack</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Projects Pane -->
+                <div class="tab-pane grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="content-projects">
+                    
+                    <!-- Card 1 -->
+                    <div class="group bg-surface-card/90 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between shadow-lg border border-surface-container/50 cursor-pointer" data-tilt data-tilt-scale="1.03">
+                        <div class="flex flex-col gap-4">
+                            <div class="aspect-[16/10] w-full rounded-xl overflow-hidden bg-surface-container relative flex items-center justify-center">
+                                <img src="card-kkn.png" alt="Visual KKN Nasional" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <h3 class="text-lg font-bold text-text-primary group-hover:text-primary transition-colors">VISUAL MEDIA KKN MAS 2025</h3>
+                                <p class="text-sm text-text-secondary line-clamp-2">Strategi komunikasi visual dan dokumentasi program KKN Muhammadiyah-Aisyiyah se-Indonesia.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Photoshop</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Canva</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Figma</span>
+                            </div>
+                        </div>
+                        <div class="pt-5 mt-2 flex items-center justify-between">
+                            <a class="inline-flex items-center gap-1.5 text-primary hover:text-secondary text-sm font-bold transition-colors" href="project-mediakkn.html"><span>Details</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="group bg-surface-card/90 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between shadow-lg border border-surface-container/50 cursor-pointer" data-tilt data-tilt-scale="1.03">
+                        <div class="flex flex-col gap-4">
+                            <div class="aspect-[16/10] w-full rounded-xl overflow-hidden bg-surface-container relative flex items-center justify-center">
+                                <img src="pos.png" alt="Point of Sale" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <h3 class="text-lg font-bold text-text-primary group-hover:text-primary transition-colors">WEBSITE POINT OF SALE</h3>
+                                <p class="text-sm text-text-secondary line-clamp-2">Sistem Point of Sale (POS) modern berbasis web yang dirancang khusus untuk mempercepat operasional restoran.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Laravel</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Figma</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">PHP</span>
+                            </div>
+                        </div>
+                        <div class="pt-5 mt-2 flex items-center justify-between">
+                            <a class="inline-flex items-center gap-1.5 text-primary hover:text-secondary text-sm font-bold transition-colors" href="project-pos.html"><span>Details</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="group bg-surface-card/90 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between shadow-lg border border-surface-container/50 cursor-pointer" data-tilt data-tilt-scale="1.03">
+                        <div class="flex flex-col gap-4">
+                            <div class="aspect-[16/10] w-full rounded-xl overflow-hidden bg-surface-container relative flex items-center justify-center">
+                                <img src="dicocleen.png" alt="Dicoo Cleen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <h3 class="text-lg font-bold text-text-primary group-hover:text-primary transition-colors">DICOO CLEEN</h3>
+                                <p class="text-sm text-text-secondary line-clamp-2">Desain UI Platform mobile inovatif yang menghubungkan masyarakat dengan pengelola sampah.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Figma</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Laravel</span>
+                            </div>
+                        </div>
+                        <div class="pt-5 mt-2 flex items-center justify-between">
+                            <a class="inline-flex items-center gap-1.5 text-primary hover:text-secondary text-sm font-bold transition-colors" href="projectdicocleen.html"><span>Details</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="group bg-surface-card/90 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between shadow-lg border border-surface-container/50 cursor-pointer" data-tilt data-tilt-scale="1.03">
+                        <div class="flex flex-col gap-4">
+                            <div class="aspect-[16/10] w-full rounded-xl overflow-hidden bg-surface-container relative flex items-center justify-center">
+                                <img src="Websitekmks.png" alt="Sistem Informasi KMKS" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <h3 class="text-lg font-bold text-text-primary group-hover:text-primary transition-colors">SISTEM INFORMASI KMKS</h3>
+                                <p class="text-sm text-text-secondary line-clamp-2">Tata kelola organisasi kemahasiswaan dengan sistem digitalisasi administrasi.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">PHP</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Laravel</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">SQL</span>
+                            </div>
+                        </div>
+                        <div class="pt-5 mt-2 flex items-center justify-between">
+                            <a class="inline-flex items-center gap-1.5 text-primary hover:text-secondary text-sm font-bold transition-colors" href="project-websitekmks.html"><span>Details</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="group bg-surface-card/90 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between shadow-lg border border-surface-container/50 cursor-pointer" data-tilt data-tilt-scale="1.03">
+                        <div class="flex flex-col gap-4">
+                            <div class="aspect-[16/10] w-full rounded-xl overflow-hidden bg-surface-container relative flex items-center justify-center">
+                                <img src="Arsipsurat.png" alt="Arsip Surat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <h3 class="text-lg font-bold text-text-primary group-hover:text-primary transition-colors">WEBSITE ARSIP SURAT</h3>
+                                <p class="text-sm text-text-secondary line-clamp-2">Website arsip surat berbasis lokal yang dirancang untuk mempermudah proses pengiriman dan pengelolaan surat antar fakultas serta lingkungan kampus secara digital. Sistem ini membantu mengurangi penggunaan kertas, mempercepat distribusi surat, dan membuat pengarsipan dokumen menjadi lebih efisien serta terorganisasi.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Laravel</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">PHP</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Tailwind CSS</span>
+                            </div>
+                        </div>
+                        <div class="pt-5 mt-2 flex items-center justify-between">
+                            <a class="inline-flex items-center gap-1.5 text-primary hover:text-secondary text-sm font-bold transition-colors" href="projectarsip.html"><span>Details</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 6 -->
+                    <div class="group bg-surface-card/90 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between shadow-lg border border-surface-container/50 cursor-pointer" data-tilt data-tilt-scale="1.03">
+                        <div class="flex flex-col gap-4">
+                            <div class="aspect-[16/10] w-full rounded-xl overflow-hidden bg-surface-container relative flex items-center justify-center">
+                                <img src="Ptjayaperdanagemilang.png" alt="Arsip Surat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <h3 class="text-lg font-bold text-text-primary group-hover:text-primary transition-colors">WEBSITE COMPANY PROFIL PT JAYA PERDANA GEMILANG</h3>
+                                <p class="text-sm text-text-secondary line-clamp-2">Website company profile untuk Jaya Perdana Gemilang yang berfokus pada penyajian informasi perusahaan, katalog produk, artikel, serta informasi distribusi dalam tampilan yang modern, profesional, dan responsif.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Laravel</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">PHP</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Tailwind CSS</span>
+                            </div>
+                        </div>
+                        <div class="pt-5 mt-2 flex items-center justify-between">
+                            <a class="inline-flex items-center gap-1.5 text-primary hover:text-secondary text-sm font-bold transition-colors" href="projectarsip.html"><span>Details</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+                        </div>
+                    </div>
+                     
+                    <!-- Card 6 -->
+                    <div class="group bg-surface-card/90 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between shadow-lg border border-surface-container/50 cursor-pointer" data-tilt data-tilt-scale="1.03">
+                        <div class="flex flex-col gap-4">
+                            <div class="aspect-[16/10] w-full rounded-xl overflow-hidden bg-surface-container relative flex items-center justify-center">
+                                <img src="desain.png" alt="Arsip Surat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <h3 class="text-lg font-bold text-text-primary group-hover:text-primary transition-colors">Publikasi, Dokumentasi & Digital Creative</h3>
+                                <p class="text-sm text-text-secondary line-clamp-2">Selain memiliki ketertarikan dalam pengembangan website, saya juga aktif mengeksplorasi dunia media dan desain visual. Saya terbiasa mengelola media sosial, membuat desain UI, serta merancang berbagai kebutuhan promosi seperti poster, banner, konten digital, dan materi publikasi untuk kegiatan maupun organisasi.
+
+Bagi saya, desain bukan hanya tentang tampilan yang menarik, tetapi juga tentang bagaimana menyampaikan informasi secara jelas, membangun identitas visual, dan menciptakan komunikasi yang efektif dengan audiens. Melalui setiap karya, saya terus mengembangkan kreativitas, kemampuan visual, dan pemahaman terhadap kebutuhan pengguna maupun tujuan komunikasi</p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Figma</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Photoshop</span>
+                                <span class="px-2.5 py-0.5 rounded bg-surface-container text-xs text-text-muted">Canva</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- See All Button -->
+                    <div class="w-full col-span-full flex justify-center items-center pt-8 pb-4" id="content-projects-btn">
+                        <a href="halaman-semuaproject.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-surface-card border border-surface-variant/50 hover:border-primary/50 hover:bg-surface-card-hover text-text-primary text-sm transition-all duration-300 shadow-md group">
+                            <span>Lihat Semua Project</span>
+                            <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Certificates Pane -->
+              <div class="tab-pane hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="content-certificates">
+    
+    <!-- Sertifikat 1: VSGA -->
+    <div onclick="openCertificate('vsga.png')" class="bg-surface-card border border-surface-container/50 p-6 rounded-2xl flex items-center gap-4 cursor-pointer hover:border-primary/50 transition-colors" data-tilt data-tilt-scale="1.05">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden border border-surface-variant/40">
+            <img src="vsga.png" alt="Sertifikat VSGA" class="w-full h-full object-cover">
+        </div>
+        <div>
+            <h4 class="text-base font-bold text-text-primary">Vocational School Graduate Academy</h4>
+            <p class="text-xs text-text-secondary mt-1">Digital Talent Scholarship 2023 • Kominfo Medan</p>
+        </div>
+    </div>
+
+    <!-- Sertifikat 2: KKN MAS -->
+    <div onclick="openCertificate('kknmas.png')" class="bg-surface-card border border-surface-container/50 p-6 rounded-2xl flex items-center gap-4 cursor-pointer hover:border-primary/50 transition-colors" data-tilt data-tilt-scale="1.05">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden border border-surface-variant/40">
+            <img src="kknmas.png" alt="Sertifikat KKN MAS" class="w-full h-full object-cover">
+        </div>
+        <div>
+            <h4 class="text-base font-bold text-text-primary">Kuliah Kerja Nyata Muhammadiyah Aisyiyah Seluruh Indonesia 2025</h4>
+            <p class="text-xs text-text-secondary mt-1">Provinsi Riau Kabupaten Siak Desa Lubuk Dalam</p>
+        </div>
+    </div>
+
+    <!-- Sertifikat 3: Pelatihan Membuat Konten -->
+    <div onclick="openCertificate('sertifbuatkonten.png')" class="bg-surface-card border border-surface-container/50 p-6 rounded-2xl flex items-center gap-4 cursor-pointer hover:border-primary/50 transition-colors" data-tilt data-tilt-scale="1.05">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden border border-surface-variant/40">
+            <img src="sertifbuatkonten.png" alt="Sertifikat Membuat Konten" class="w-full h-full object-cover">
+        </div>
+        <div>
+            <h4 class="text-base font-bold text-text-primary">Pelatihan Membuat Konten dengan Smartphone</h4>
+            <p class="text-xs text-text-secondary mt-1">Bakti Komdigi dan Media Tempo</p>
+        </div>
+    </div>
+ <!-- Sertifikat 4 toefl -->
+    <div onclick="openCertificate('toefl.jpeg')" class="bg-surface-card border border-surface-container/50 p-6 rounded-2xl flex items-center gap-4 cursor-pointer hover:border-primary/50 transition-colors" data-tilt data-tilt-scale="1.05">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden border border-surface-variant/40">
+            <img src="toefl.jpeg" alt="Sertifikat Membuat Konten" class="w-full h-full object-cover">
+        </div>
+        <div>
+            <h4 class="text-base font-bold text-text-primary">TOEFL</h4>
+        </div>
+    </div>
+<div onclick="openCertificate('poster.png')" class="bg-surface-card border border-surface-container/50 p-6 rounded-2xl flex items-center gap-4 cursor-pointer hover:border-primary/50 transition-colors" data-tilt data-tilt-scale="1.05">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden border border-surface-variant/40">
+            <img src="poster.png"Sertifikat Poster Digital" class="w-full h-full object-cover">
+        </div>
+        <div>
+            <h4 class="text-base font-bold text-text-primary">Lomba Poster Digital Sekalimantan Barat</h4>
+            <p class="text-xs text-text-secondary mt-1">BNN Kalimantan Barat</p>
+        </div>
+    </div>
+
+</div>
+                <!-- Organisasi Pane -->
+                <div class="tab-pane hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="content-awards">
+    
+    <!-- Card 1: BEM UMP -->
+    <div class="bg-surface-card border border-surface-container/50 p-6 rounded-2xl flex items-start gap-4" data-tilt data-tilt-scale="1.03">
+        <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden border border-surface-variant/40">
+            <img src="desain.png" alt="Logo BEM UMP" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200&auto=format&fit=crop'"/>
+        </div>
+        <div class="flex flex-col">
+            <h4 class="text-lg font-bold text-text-primary">Menteri Luar Negeri BEM UMP</h4>
+            <p class="text-sm text-text-secondary mt-1">Badan Eksekutif Keluarga Mahasiswa Universitas Muhammadiyah Pontianak(2025-2026).</p>
+        </div>
+    </div>
+
+    <!-- Card 2: HIMASI -->
+    <div class="bg-surface-card border border-surface-container/50 p-6 rounded-2xl flex items-start gap-4" data-tilt data-tilt-scale="1.03">
+        <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden border border-surface-variant/40">
+            <img src="logo-himasi.png" alt="Logo HIMASI" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200&auto=format&fit=crop'"/>
+        </div>
+        <div class="flex flex-col">
+            <h4 class="text-lg font-bold text-text-primary">Ketua Bidang Penalaran dan Keilmuan Himpunan Mahasiswa Sistem Informasi </h4>
+            <p class="text-sm text-text-secondary mt-1">Fakultas Teknik dan Ilmu Komputer UMP (2024-2025).</p>
+        </div>
+    </div>
+
+    <!-- Card 3: KMKS -->
+    <div class="bg-surface-card border border-surface-container/50 p-6 rounded-2xl flex items-start gap-4" data-tilt data-tilt-scale="1.03">
+        <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden border border-surface-variant/40">
+            <img src="logo-kmks.png" alt="Logo KMKS" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200&auto=format&fit=crop'"/>
+        </div>
+        <div class="flex flex-col">
+            <h4 class="text-lg font-bold text-text-primary">Pengurus Divisi Kajian dan Advokasi pada Badan Pengurus Wilayah (BPW) XII .</h4>
+            <p class="text-sm text-text-secondary mt-1">PERMIKOMNAS Kalimantan 2024/2025</p>
+        </div>
+    </div>
+
+    <div class="bg-surface-card border border-surface-container/50 p-6 rounded-2xl flex items-start gap-4" data-tilt data-tilt-scale="1.03">
+        <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden border border-surface-variant/40">
+            <img src="logo-org1.png" alt="Logo Organisasi" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200&auto=format&fit=crop'"/>
+        </div>
+        <div class="flex flex-col">
+            <h4 class="text-lg font-bold text-text-primary">Ketua Bidang Internal</h4>
+            <p class="text-sm text-text-secondary mt-1">Komite Mahasiswa Kabupaten Sambas 2024/2026</p>
+        </div>
+    </div>
+    <div class="bg-surface-card border border-surface-container/50 p-6 rounded-2xl flex items-start gap-4" data-tilt data-tilt-scale="1.03">
+        <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden border border-surface-variant/40">
+            <img src="logo-org2.png" alt="Logo Organisasi" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200&auto=format&fit=crop'"/>
+        </div>
+        <div class="flex flex-col">
+            <h4 class="text-lg font-bold text-text-primary">Ketua Umum</h4>
+            <p class="text-sm text-text-secondary mt-1">Ikatan Mahasiswa Desa Sendoyan 2023/2026.</p>
+        </div>
+    </div>
+    <!-- Card 3: KMKS -->
+    <div class="bg-surface-card border border-surface-container/50 p-6 rounded-2xl flex items-start gap-4" data-tilt data-tilt-scale="1.03">
+        <div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden border border-surface-variant/40">
+            <img src="logo-kmks.png" alt="Logo KMKS" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200&auto=format&fit=crop'"/>
+        </div>
+        <div class="flex flex-col">
+            <h4 class="text-lg font-bold text-text-primary">Pengurus Hubungan Masyarakat .</h4>
+            <p class="text-sm text-text-secondary mt-1">Komite Mahasiswa Kabupaten Sambas 2022/2024</p>
+        </div>
+    </div>
+
+</div>
+                <!-- Tech Stack Pane -->
+                <div class="tab-pane hidden grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" id="content-tech">
+    
+    <!-- HTML -->
+    <div class="bg-surface-card border border-surface-container/50 p-5 rounded-2xl text-center flex flex-col items-center justify-center gap-3 cursor-pointer" data-tilt data-tilt-scale="1.1">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden p-2 border border-surface-variant/40">
+            <img src="html-logo.png" alt="HTML5" class="w-full h-full object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/732/732212.png'">
+        </div>
+        <span class="text-sm font-bold text-text-primary">HTML</span>
+    </div>
+
+    <!-- CSS -->
+    <div class="bg-surface-card border border-surface-container/50 p-5 rounded-2xl text-center flex flex-col items-center justify-center gap-3 cursor-pointer" data-tilt data-tilt-scale="1.1">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden p-2 border border-surface-variant/40">
+            <img src="css-logo.png" alt="CSS3" class="w-full h-full object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/732/732190.png'">
+        </div>
+        <span class="text-sm font-bold text-text-primary">CSS</span>
+    </div>
+
+    <!-- Tailwind CSS -->
+    <div class="bg-surface-card border border-surface-container/50 p-5 rounded-2xl text-center flex flex-col items-center justify-center gap-3 cursor-pointer" data-tilt data-tilt-scale="1.1">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden p-2 border border-surface-variant/40">
+            <img src="tailwind-logo.png" alt="Tailwind CSS" class="w-full h-full object-contain" onerror="this.src='https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg'">
+        </div>
+        <span class="text-sm font-bold text-text-primary">Tailwind CSS</span>
+    </div>
+
+    <!-- PHP -->
+    <div class="bg-surface-card border border-surface-container/50 p-5 rounded-2xl text-center flex flex-col items-center justify-center gap-3 cursor-pointer" data-tilt data-tilt-scale="1.1">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden p-2 border border-surface-variant/40">
+            <img src="php-logo.png" alt="PHP" class="w-full h-full object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/5968/5968332.png'">
+        </div>
+        <span class="text-sm font-bold text-text-primary">PHP</span>
+    </div>
+
+    <!-- Laravel -->
+    <div class="bg-surface-card border border-surface-container/50 p-5 rounded-2xl text-center flex flex-col items-center justify-center gap-3 cursor-pointer" data-tilt data-tilt-scale="1.1">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden p-2 border border-surface-variant/40">
+            <img src="laravel.webp" alt="Laravel" class="w-full h-full object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/5968/5968282.png'">
+        </div>
+        <span class="text-sm font-bold text-text-primary">Laravel</span>
+    </div>
+
+    <!-- Flutter -->
+    <div class="bg-surface-card border border-surface-container/50 p-5 rounded-2xl text-center flex flex-col items-center justify-center gap-3 cursor-pointer" data-tilt data-tilt-scale="1.1">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden p-2 border border-surface-variant/40">
+            <img src="fluter.png" alt="Flutter" class="w-full h-full object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/5968/5968350.png'">
+        </div>
+        <span class="text-sm font-bold text-text-primary">Flutter</span>
+    </div>
+
+    <!-- Figma UI/UX -->
+    <div class="bg-surface-card border border-surface-container/50 p-5 rounded-2xl text-center flex flex-col items-center justify-center gap-3 cursor-pointer" data-tilt data-tilt-scale="1.1">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden p-2 border border-surface-variant/40">
+            <img src="figma-logo.png" alt="Figma UI/UX" class="w-full h-full object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/5968/5968705.png'">
+        </div>
+        <span class="text-sm font-bold text-text-primary">Figma UI/UX</span>
+    </div>
+
+    <!-- Photoshop -->
+    <div class="bg-surface-card border border-surface-container/50 p-5 rounded-2xl text-center flex flex-col items-center justify-center gap-3 cursor-pointer" data-tilt data-tilt-scale="1.1">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden p-2 border border-surface-variant/40">
+            <img src="photoshop-logo.png" alt="Photoshop" class="w-full h-full object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/5968/5968525.png'">
+        </div>
+        <span class="text-sm font-bold text-text-primary">Photoshop</span>
+    </div>
+    
+    <!-- JavaScript -->
+    <div class="bg-surface-card border border-surface-container/50 p-5 rounded-2xl text-center flex flex-col items-center justify-center gap-3 cursor-pointer" data-tilt data-tilt-scale="1.1">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden p-2 border border-surface-variant/40">
+            <img src="js-logo.png" alt="JavaScript" class="w-full h-full object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/5968/5968292.png'">
+        </div>
+        <span class="text-sm font-bold text-text-primary">JavaScript</span>
+    </div>
+
+    <!-- React / Vue -->
+    <div class="bg-surface-card border border-surface-container/50 p-5 rounded-2xl text-center flex flex-col items-center justify-center gap-3 cursor-pointer" data-tilt data-tilt-scale="1.1">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden p-2 border border-surface-variant/40">
+            <img src="canva.png" alt="React / Vue" class="w-full h-full object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1126/1126012.png'">
+        </div>
+        <span class="text-sm font-bold text-text-primary">Canva</span>
+    </div>
+     <!-- Figma UI/UX -->
+    <div class="bg-surface-card border border-surface-container/50 p-5 rounded-2xl text-center flex flex-col items-center justify-center gap-3 cursor-pointer" data-tilt data-tilt-scale="1.1">
+        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0 overflow-hidden p-2 border border-surface-variant/40">
+            <img src="capcut.png" class="w-full h-full object-contain" onerror="this.src='https://cdn-icons-png.flaticon.com/512/5968/5968705.png'">
+        </div>
+        <span class="text-sm font-bold text-text-primary">Capcut</span>
+    </div>
+
+</div>
+            </section>
+
+            <!-- SECTION 4: CONTACT & GUESTBOOK -->
+            <section class="flex flex-col gap-10 scroll-mt-24" id="contact">
+                <div class="text-center flex flex-col items-center gap-2">
+                    <span class="text-xs text-primary tracking-widest uppercase font-bold">Get In Touch</span>
+                    <h2 class="text-3xl md:text-4xl font-headline-xl font-bold text-text-primary">Hubungi Saya</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-5 flex flex-col gap-6">
+                        <div class="bg-surface-card/90 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-xl flex flex-col gap-5 border border-surface-container/50">
+                            <div class="flex flex-col">
+                                <h3 class="text-xl font-bold text-text-primary">Kirim Pesan</h3>
+                                <p class="text-sm text-text-secondary mt-1">Ada tawaran pekerjaan atau diskusi? Kirim pesan langsung!</p>
+                            </div>
+                            <form class="flex flex-col gap-4" onsubmit="handleContactSubmit(event)">
+                                <div class="relative flex items-center">
+                                    <span class="material-symbols-outlined absolute left-3.5 text-text-muted text-[18px]">person</span>
+                                    <input class="w-full pl-10 pr-4 py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-text-muted text-sm border border-surface-variant/30 focus:border-primary focus:outline-none" placeholder="Nama Anda" required="" type="text"/>
+                                </div>
+                                <div class="relative flex items-center">
+                                    <span class="material-symbols-outlined absolute left-3.5 text-text-muted text-[18px]">mail</span>
+                                    <input class="w-full pl-10 pr-4 py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-text-muted text-sm border border-surface-variant/30 focus:border-primary focus:outline-none" placeholder="Email Anda" required="" type="email"/>
+                                </div>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-3.5 top-3.5 text-text-muted text-[18px]">chat</span>
+                                    <textarea class="w-full pl-10 pr-4 py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-text-muted text-sm border border-surface-variant/30 focus:border-primary focus:outline-none resize-none" placeholder="Pesan Anda" required="" rows="4"></textarea>
+                                </div>
+                                <button class="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-primary-container hover:bg-primary text-on-primary-container text-sm font-bold transition-all shadow-[0_0_20px_rgba(77,142,255,0.4)]" type="submit">
+                                    <span class="material-symbols-outlined text-[18px]">send</span>
+                                    <span>Kirim Pesan</span>
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="bg-surface-card/90 backdrop-blur-xl rounded-3xl p-6 shadow-xl flex flex-col gap-3 border border-surface-container/50">
+                            <span class="text-xs text-text-muted uppercase tracking-wider font-bold mb-2">Contact Info</span>
+                            <a class="flex items-center justify-between p-3 rounded-xl bg-surface-container hover:bg-surface-card-hover transition-colors" href="mailto:Krisprediansyah99@gmail.com">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center text-primary">
+                                        <span class="material-symbols-outlined text-[20px]">mail</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-text-primary">Email</span>
+                                        <span class="text-xs text-text-muted">Krisprediansyah99@gmail.com</span>
+                                    </div>
+                                </div>
+                                <span class="material-symbols-outlined text-text-muted text-[18px]">open_in_new</span>
+                            </a>
+                            <a class="flex items-center justify-between p-3 rounded-xl bg-surface-container hover:bg-surface-card-hover transition-colors" href="https://wa.me/62895618222221" target="_blank">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center text-secondary">
+                                        <span class="material-symbols-outlined text-[20px]">phone_iphone</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-text-primary">WhatsApp</span>
+                                        <span class="text-xs text-text-muted">+62 895-6182-22221</span>
+                                    </div>
+                                </div>
+                                <span class="material-symbols-outlined text-text-muted text-[18px]">open_in_new</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-7 bg-surface-card/90 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-xl flex flex-col gap-6 border border-surface-container/50">
+                        <div class="flex items-center justify-between pb-2">
+                            <div class="flex items-center gap-2.5">
+                                <span class="material-symbols-outlined text-primary text-[24px]">forum</span>
+                                <h3 class="text-xl font-bold text-text-primary">Guestbook</h3>
+                                <span class="px-2.5 py-0.5 rounded-full bg-surface-container text-xs text-primary font-bold" id="comment-count">12</span>
+                            </div>
+                            <span class="text-xs text-text-muted">Tinggalkan jejak!</span>
+                        </div>
+                        
+                        <form class="flex flex-col gap-3 bg-surface-container-lowest/80 p-4 rounded-2xl border border-surface-variant/30" onsubmit="handlePostComment(event)">
+                            <div class="flex flex-col gap-1">
+                                <label class="text-xs text-text-muted">Nama</label>
+                                <input class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container text-on-surface placeholder:text-text-muted text-sm focus:outline-none border border-surface-variant/30" id="input-author" placeholder="Masukkan nama kamu" required="" type="text"/>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label class="text-xs text-text-muted">Komentar</label>
+                                <textarea class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container text-on-surface placeholder:text-text-muted text-sm focus:outline-none resize-none border border-surface-variant/30" id="input-comment" placeholder="Tulis komentar..." required="" rows="3"></textarea>
+                            </div>
+                            <div class="flex items-center justify-between pt-2">
+                                <span class="text-xs text-text-muted">Avatar otomatis</span>
+                                <button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-container hover:bg-primary text-on-primary-container text-sm font-bold transition-all shadow-md" type="submit">
+                                    <span class="material-symbols-outlined text-[16px]">chat_bubble</span>
+                                    <span>Kirim</span>
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div class="flex flex-col gap-3.5 max-h-[460px] overflow-y-auto pr-1" id="comments-container">
+                            <div class="bg-surface-container/60 hover:bg-surface-container/90 border border-surface-variant/20 rounded-2xl p-4 flex items-start gap-3 transition-colors">
+                                <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm shrink-0">AD</div>
+                                <div class="flex flex-col flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm font-bold text-text-primary">Aditya</span>
+                                        <span class="text-xs text-text-muted">1d ago</span>
+                                    </div>
+                                    <p class="text-sm text-text-secondary mt-1">Keren portofolionya mas Kris! Clean & responsif banget 🔥</p>
+                                </div>
+                            </div>
+                            <div class="bg-surface-container/60 hover:bg-surface-container/90 border border-surface-variant/20 rounded-2xl p-4 flex items-start gap-3 transition-colors">
+                                <div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-sm shrink-0">RN</div>
+                                <div class="flex flex-col flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm font-bold text-text-primary">Rina Novianti</span>
+                                        <span class="text-xs text-text-muted">2d ago</span>
+                                    </div>
+                                    <p class="text-sm text-text-secondary mt-1">Sangat menginspirasi rekam jejak organisasinya. Sukses terus kak!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="w-full bg-surface-container-lowest/80 backdrop-blur-xl py-10 border-t border-surface-container">
+        <div class="max-w-[1180px] mx-auto px-gutter-mobile md:px-gutter flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <span class="text-lg font-bold text-on-surface">Kris Prediansyah</span>
+                <p class="text-sm text-text-muted text-center md:text-left">© 2026 Kris Prediansyah. Pontianak, Kalimantan Barat.</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <a class="w-12 h-12 rounded-full bg-surface-card border border-surface-container flex items-center justify-center text-text-secondary hover:text-primary transition-transform hover:scale-110" href="https://instagram.com/k.frdisyh" target="_blank">
+                    <span class="material-symbols-outlined">photo_camera</span>
+                </a>
+                <a class="w-12 h-12 rounded-full bg-surface-card border border-surface-container flex items-center justify-center text-text-secondary hover:text-primary transition-transform hover:scale-110" href="mailto:Krisprediansyah99@gmail.com">
+                    <span class="material-symbols-outlined">mail</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- MODAL POPUP SERTIFIKAT -->
+    <!-- ========================================== -->
+    <div id="certModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+        <!-- Tombol Close -->
+        <button onclick="closeCertificate()" class="absolute top-6 right-6 text-white bg-white/10 hover:bg-white/20 rounded-full p-2 backdrop-blur-md transition-all">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </button>
+        
+        <!-- Gambar Sertifikat -->
+        <img id="certImage" src="" alt="Sertifikat" class="max-w-full max-h-[90vh] rounded-xl shadow-2xl transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SEMUA JAVASCRIPT & LOGIKA -->
+    <!-- ========================================== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script>
+        // 1. PRELOADER LOGIC
+        (function initPreloader() {
+            const preloader = document.getElementById('preloader');
+            if (sessionStorage.getItem('preloaderShown') === 'true') {
+                if (preloader) preloader.style.display = 'none';
+                return; 
+            }
+
+            const greetingEl = document.getElementById('preloader-greeting');
+            const percentEl = document.getElementById('preloader-percent');
+            const barEl = document.getElementById('preloader-bar');
+            if (!preloader) return;
+
+            let progress = 0;
+            const duration = 1500; 
+            const intervalTime = 20;
+            const increment = 100 / (duration / intervalTime);
+
+            const greetingTimer1 = setTimeout(() => {
+                if (greetingEl) {
+                    greetingEl.style.opacity = '0';
+                    setTimeout(() => {
+                        greetingEl.textContent = 'Selamat Datang';
+                        greetingEl.style.opacity = '1';
+                    }, 120);
+                }
+            }, 500);
+
+            const greetingTimer2 = setTimeout(() => {
+                if (greetingEl) {
+                    greetingEl.style.opacity = '0';
+                    setTimeout(() => {
+                        greetingEl.textContent = 'Kris Prediansyah';
+                        greetingEl.style.opacity = '1';
+                    }, 120);
+                }
+            }, 1000);
+
+            const interval = setInterval(() => {
+                progress += increment;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    if (percentEl) percentEl.textContent = '100%';
+                    if (barEl) barEl.style.width = '100%';
+                    setTimeout(dismissPreloader, 250);
+                } else {
+                    if (percentEl) percentEl.textContent = Math.floor(progress) + '%';
+                    if (barEl) barEl.style.width = progress + '%';
+                }
+            }, intervalTime);
+
+            window.dismissPreloader = function() {
+                clearInterval(interval);
+                clearTimeout(greetingTimer1);
+                clearTimeout(greetingTimer2);
+                preloader.classList.add('preloader-hidden');
+                sessionStorage.setItem('preloaderShown', 'true');
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 900);
+            };
+        })();
+
+        // 2. MODAL SERTIFIKAT LOGIC
+        function openCertificate(imageSrc) {
+            const modal = document.getElementById('certModal');
+            const modalImg = document.getElementById('certImage');
+            
+            // Ganti sumber gambar sesuai kartu yang diklik
+            modalImg.src = imageSrc;
+            
+            // Tampilkan modal
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeCertificate() {
+            const modal = document.getElementById('certModal');
+            const modalImg = document.getElementById('certImage');
+            
+            // Sembunyikan modal
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            
+            // Bersihkan src setelah animasi selesai agar tidak glitch
+            setTimeout(() => {
+                modalImg.src = '';
+            }, 300);
+        }
+
+        // Menutup modal jika area kosong/background hitam diklik
+        document.getElementById('certModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCertificate();
+            }
+        });
+
+        // 3. TABS LOGIC (Portofolio)
+        function switchTab(tabId) {
+            const tabs = document.querySelectorAll('.portfolio-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-semibold');
+                tab.classList.add('text-text-muted');
+            });
+
+            const activeTab = document.getElementById('tab-' + tabId);
+            if (activeTab) {
+                activeTab.classList.add('bg-primary-container', 'text-on-primary-container', 'font-semibold');
+                activeTab.classList.remove('text-text-muted');
+            }
+
+            const panes = document.querySelectorAll('.tab-pane');
+            panes.forEach(pane => pane.classList.add('hidden'));
+
+            const targetPane = document.getElementById('content-' + tabId);
+            if (targetPane) {
+                targetPane.classList.remove('hidden');
+            }
+            
+            const btnPane = document.getElementById('content-projects-btn');
+            if(btnPane) {
+                if(tabId === 'projects') btnPane.classList.remove('hidden');
+                else btnPane.classList.add('hidden');
+            }
+        }
+
+        // 4. GUESTBOOK LOGIC
+        function handlePostComment(event) {
+            event.preventDefault();
+            const authorInput = document.getElementById('input-author');
+            const commentInput = document.getElementById('input-comment');
+            const container = document.getElementById('comments-container');
+            const countBadge = document.getElementById('comment-count');
+
+            if (!authorInput.value.trim() || !commentInput.value.trim()) return;
+
+            const author = authorInput.value.trim();
+            const comment = commentInput.value.trim();
+            const initials = author.substring(0, 2).toUpperCase();
+
+            const newCommentEl = document.createElement('div');
+            newCommentEl.className = 'bg-surface-container/60 hover:bg-surface-container/90 border border-surface-variant/20 rounded-2xl p-4 flex items-start gap-3 transition-colors';
+            newCommentEl.innerHTML = `
+                <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm shrink-0">${initials}</div>
+                <div class="flex flex-col flex-1">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-bold text-text-primary">${author}</span>
+                        <span class="text-xs text-primary font-semibold">Just now</span>
+                    </div>
+                    <p class="text-sm text-text-secondary mt-1">${comment}</p>
+                </div>
+            `;
+
+            container.insertBefore(newCommentEl, container.firstChild);
+            
+            let count = parseInt(countBadge.textContent, 10);
+            if (!isNaN(count)) countBadge.textContent = count + 1;
+
+            authorInput.value = '';
+            commentInput.value = '';
+        }
+
+        // 5. CONTACT FORM LOGIC
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Terkirim! Terima kasih</span>`;
+            btn.classList.add('bg-secondary');
+            
+            setTimeout(() => {
+                form.reset();
+                btn.innerHTML = originalText;
+                btn.classList.remove('bg-secondary');
+            }, 2800);
+        }
+    </script>
+</body>
+</html>
